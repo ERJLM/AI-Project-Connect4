@@ -1,7 +1,7 @@
 # Projeto-IA-2
 Connect Four: 4 em linha
 
-# Versão do Java
+## Versão do Java
 
 ``` OpenJDK - version 17 ```
 
