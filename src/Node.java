@@ -23,6 +23,17 @@ public class Node{
     return state;
  }
 
+ char getTurn(){
+    return turn;
+ }
+
+ int getDepth(){
+     return depth;
+ }
+
+ Node getParent(){
+    return parent;
+ }
  //This method calculates the evaluation of the state
  int evaluator(){
      
