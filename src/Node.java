@@ -23,6 +23,11 @@ public class Node{
     return state;
  }
 
+ //This method calculates the evaluation of the game
+ int evaluator(){
+     
+ }
+ 
  Node copy(){
     Node res = new Node();
     res.setParent(parent);
