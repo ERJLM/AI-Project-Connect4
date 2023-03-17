@@ -1,8 +1,13 @@
 public class Game {
     private Node node;
+    private char playerToken;
+    private char myToken; 
 
-    Game(Node n){
+    Game(Node n, char playerT){
         node = n;
+        playerToken = playerT;
+        if(playerT == 'X') myToken = 'O';
+        else myToken = 'X';
     }
     
 
