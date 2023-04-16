@@ -49,11 +49,8 @@ public class Game {
       int v = Integer.MIN_VALUE;
       Node best = node.copy();
       if('X' == pcToken){ 
-        node.print(); 
         for(Node n : node.expand()){
           int t = maxValue(n);
-          n.print();
-          System.out.println(n.utility());
           if(t > v){
             v = t;
             best = n; 
@@ -62,11 +59,8 @@ public class Game {
       }
       else {
         v = Integer.MAX_VALUE;
-        node.print();
         for(Node n : node.expand()){
           int t = minValue(n);
-          n.print();
-          System.out.println(n.utility());
           if(t < v){
             v = t;
             best = n; 
@@ -75,7 +69,6 @@ public class Game {
       }
     
       node.move(best.getLastMove());
-      System.out.println(v);
       return best.getLastMove();
     }
     
