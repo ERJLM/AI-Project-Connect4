@@ -1,10 +1,14 @@
 import java.util.HashSet;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Node{
  private Node parent;
  private int depth;
+ private char starter;
+ private char player;
  private int lastMove;
  private char[][] state = new char[6][7];
  private char turn;
@@ -16,7 +20,13 @@ public class Node{
                 state[i][j] = '-';
             }
         }
+        Random rand = new Random();
+        int upper = 2;
+        int t = rand.nextInt(upper);
+        if(t == 0)player = 'X';
+        else player = 'O';
         turn = 'X';
+        starter = turn;
         parent = null;
         depth = 0;
         lastMove = 0;
@@ -28,6 +38,14 @@ public class Node{
 
  char getTurn(){
     return turn;
+ }
+
+ char getPlayer(){
+    return player;
+ }
+
+ char getStarter(){
+    return starter;
  }
 
  int getDepth(){
@@ -56,8 +74,8 @@ public class Node{
     return res;
  }
 
- ArrayDeque<Node> expand(){
-    ArrayDeque<Node> q = new ArrayDeque<>();
+ ArrayList<Node> expand(){
+    ArrayList<Node> q = new ArrayList<>();
     Node n = new Node();
     for(int i = 1; i <= 7; i++){
         n = copy();
@@ -95,32 +113,6 @@ public class Node{
  private void setLastMove(int m){
     lastMove = m;
  }
-
-
- /*This method is responsible for doing a move on the Node
-  * if it returns false it is because the move was not possible.
- */
-
- /*  Node move(int m){
-    Node n = copy();
-    if(!(m >= 1 && m <= 7) || terminated()) return null;
-    for(int i = 5; i >= 0; i--){
-        if(state[i][m-1] == '-'){
-            n.setState(i, m-1, turn);
-            //if(terminated()) System.out.println("Player " + turn + " won");
-            if(turn == 'X'){ 
-             n.setTurn('O');
-            }
-            else{
-              n.setTurn('X');
-            }
-            n.setLastMove(m);
-            n.setDepth(depth + 1);;
-            return n;
-        }
-    }
-    return null;
- } */
 
  boolean move(int m){
     if(!(m >= 1 && m <= 7) || (terminated())) return false;
@@ -160,140 +152,105 @@ boolean terminated(){
     }
     return false;
 }
-
-int utility(){
+                       
+int utility() {
     int countO = 0;
     int countX = 0;
-    int consecutiveO = 0;
-    int consecutiveX = 0;
     int value = 0;
-
-    //check horizontals
-    for(int rows = 0; rows < 6; rows++){
-      countO = 0; countX = 0; consecutiveO = 0; consecutiveX = 0;
-      for(int cols = 0; cols < 7; cols++){
-        if(state[rows][cols] == 'O'){
-             countO++;
-             consecutiveO++;
-             consecutiveX = 0;
-             if(consecutiveO == 4) return -512;
+    int check = 0;
+    // check horizontals
+    for (int rows = 0; rows < 6; rows++) {
+        for (int cols = 0; cols <= 3; cols++) {
+            countO = 0; countX = 0;
+            for (int k = 0; k < 4; k++) {
+                if (state[rows][cols + k] == 'O') {
+                    countO++;
+                } else if (state[rows][cols + k] == 'X') {
+                    countX++;
+                }
+            }
+            value += checkUtility(countX, countO);
+            if (countX == 4) return 512;
+            else if(countO == 4) return -512;
+            if (Math.abs(value) >= 512) return value;
+            check++;
         }
-        else if(state[rows][cols] == 'X'){
-            countX++;
-            consecutiveX++;
-            consecutiveO = 0;
-            if(consecutiveX == 4) return 512;
-        }
-        else{
-            consecutiveO = 0;
-            consecutiveX = 0;
-        }
-      }
-      value += checkUtility(countX, countO, consecutiveO, consecutiveX);
-      if( Math.abs(value) >= 512) return value;
-    }
-  
-    //check verticals
-    for(int cols = 0; cols < 7; cols++){
-      countO = 0; countX = 0; consecutiveO = 0; consecutiveX = 0;
-      for(int rows = 0; rows < 6; rows++){
-        if(state[rows][cols] == 'O'){
-             countO++;
-             consecutiveO++;
-             consecutiveX = 0;
-             if(consecutiveO == 4) return -512;
-        }
-        else if(state[rows][cols] == 'X'){
-            countX++;
-            consecutiveX++;
-            consecutiveO = 0;
-            if(consecutiveX == 4) return 512;
-        }
-        else{
-            consecutiveO = 0;
-            consecutiveX = 0;
-        }
-      }
-      value += checkUtility(countX, countO, consecutiveO, consecutiveX);
-      if( Math.abs(value) >= 512) return value;
     }
 
-    //check normal diagonals
+    // check verticals
+    for (int cols = 0; cols < 7; cols++) {
+        for (int rows = 0; rows <= 2; rows++) {
+            countO = 0; countX = 0;
+            for (int k = 0; k < 4; k++) {
+                if (state[rows + k][cols] == 'O') {
+                    countO++;
+                } else if (state[rows + k][cols] == 'X') {
+                    countX++;
+                }
+            }
+            value += checkUtility(countX, countO);
+            if (countX == 4) return 512;
+            else if(countO == 4) return -512;
+            if (Math.abs(value) >= 512) return value;
+            check++;
+        }
+    }
+
+    // check normal diagonals
     for (int i = 0; i <= 2; i++) {
         for (int j = 0; j <= 3; j++) {
-            countO = 0; countX = 0; consecutiveO = 0; consecutiveX = 0;
-            for (int k = 0; k <= 3; k++) {
-                if (state[i+k][j+k] == 'O'){
-                     countO++;
-                     consecutiveO++;
-                     consecutiveX = 0;
-                     if(consecutiveO == 4) return -512;
-                }
-                else if (state[i+k][j+k] == 'X'){
-                     countX++;
-                     consecutiveX++;
-                     consecutiveO = 0;
-                     if(consecutiveX == 4) return 512;
-                }
-                else{
-                    consecutiveO = 0;
-                    consecutiveX = 0;
+            countO = 0; countX = 0;
+            for (int k = 0; k < 4; k++) {
+                if (state[i + k][j + k] == 'O') {
+                    countO++;
+                } else if (state[i + k][j + k] == 'X') {
+                    countX++;
                 }
             }
-            value += checkUtility(countX, countO, consecutiveO, consecutiveX);
-            if( Math.abs(value) >= 512) return value;
+            value += checkUtility(countX, countO);
+            if (countX == 4) return 512;
+            else if(countO == 4) return -512;
+            if (Math.abs(value) >= 512) return value;
+            check++;
         }
     }
 
-    //check reverse diagonals
+    // check reverse diagonals
     for (int i = 0; i <= 2; i++) {
-        for (int j = 6; j >= 3; j--) {
-            countO = 0; countX = 0; consecutiveO = 0; consecutiveX = 0;
-            for (int k = 0; k <= 3; k++) {
-                if (state[i+k][j-k] == 'O'){
-                     countO++;
-                     consecutiveO++;
-                     consecutiveX = 0;
-                     if(consecutiveO == 4) return -512;
+        for (int j = 3; j <= 6; j++) {
+            countO = 0; countX = 0;
+            for (int k = 0; k < 4; k++) {
+                if (state[i + k][j - k] == 'O') {
+                    countO++;
+                } else if (state[i + k][j - k] == 'X') {
+                    countX++;
                 }
-                else if (state[i+k][j-k] == 'X'){
-                     countX++;
-                     consecutiveX++;
-                     consecutiveO = 0;
-                     if(consecutiveX == 4) return 512;
-                }
-                else{
-                    consecutiveO = 0;
-                    consecutiveX = 0;
-                }
-                
             }
-            value += checkUtility(countX, countO, consecutiveO, consecutiveX);
-            if( Math.abs(value) >= 512) return value;
+            value += checkUtility(countX, countO);
+            if (countX == 4) return 512;
+            else if(countO == 4) return -512;
+            check++;
         }
     }
-
-
 
     return value;
 }
 
 
 
-private int checkUtility(int countX, int countO, int consecutiveO, int consecutiveX){
+  private int checkUtility(int countX, int countO){
     int value = 0;
-    if(countO == 3 && countX == 0) value -= 50;
-    else if(countO == 2 && countX == 0) value -= 10;
-    else if(countO == 1 && countX == 0) value -= 1;
-    else if(countO == 0 && countX == 1) value += 1;
-    else if(countO == 0 && countX == 2) value += 10;
-    else if(countO == 0 && countX == 3) value += 50;
-    else if(consecutiveO >= 4) return -512;
-    else if(consecutiveX >= 4) return 512;
+    if(countO == 3 && countX == 0) return -50;
+    else if(countO == 2 && countX == 0) return -10;
+    else if(countO == 1 && countX == 0) return -1;
+    else if(countO == 0 && countX == 1) return 1;
+    else if(countO == 0 && countX == 2) return 10;
+    else if(countO == 0 && countX == 3) return 50;
+    else if(countO == 0 && countX == 4) return 512;
+    else if(countO == 4 && countX == 0) return -512;
 
     return value;
   }
-
 
 void print(){
     for(int i = 0; i < 6; i++){
