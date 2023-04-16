@@ -10,26 +10,7 @@ public class CfMain {
         C4.useMiniMax();
         
         
-        //Node A = node.copy();
-       /*  node.move(4);
-        node.print();
-        System.out.println(node.utility());
-        node.move(3);
-        node.print();
-        System.out.println(node.utility());
-        node.move(5);
-        node.print();
-        System.out.println(node.utility());
-        node.move(3);
-        node.print();
-        System.out.println(node.utility());
-        node.move(6);
-        node.print();
-        System.out.println(node.utility());
-        node.move();
-        node.print();
-        System.out.println(node.utility());
-        */
+     
      sc.close();
     }
 }
