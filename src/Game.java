@@ -25,7 +25,6 @@ public class Game {
       System.out.println("Choose a move: ");
       int m = sc.nextInt();
       node.move(m);
-      //miniMax();
       node.print();
       }
   
