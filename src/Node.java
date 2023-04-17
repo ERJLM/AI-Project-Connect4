@@ -1,8 +1,4 @@
-import java.util.HashSet;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class Node{
  private Node parent;
@@ -12,8 +8,18 @@ public class Node{
  private int lastMove;
  private char[][] state = new char[6][7];
  private char turn;
+ private ArrayList<Node> children;
+ private double score;
+ private int visits;
 
-
+    Node(char[][] state, int depth, int lastMove) {
+        this.state = state;
+        this.depth = depth;
+        this.lastMove = lastMove;
+        this.score = 0;
+        this.visits = 0;
+        this.children = new ArrayList<>();
+    }
     Node(){
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 7; j++){
@@ -30,7 +36,11 @@ public class Node{
         parent = null;
         depth = 0;
         lastMove = 0;
+        score = 0;
+        visits = 0;
+        children = new ArrayList<>();
     }
+
 
  char[][] getState(){
     return state;
@@ -59,6 +69,60 @@ public class Node{
  int getLastMove(){
     return lastMove;
  }
+
+    public List<Integer> getLegalMoves() {
+        List<Integer> legalMoves = new ArrayList<Integer>();
+        for (int i = 0; i < 7; i++) {
+            if (state[0][i] == '-') {
+                legalMoves.add(i);
+            }
+        }
+        return legalMoves;
+    }
+
+    public List<Node> getChildren() {
+        if (children == null) {
+            children = new ArrayList<Node>();
+            List<Integer> legalMoves = getLegalMoves();
+            for (int move : legalMoves) {
+                children.add(childNode(move));
+            }
+        }
+        return children;
+    }
+
+    public Node childNode(int move) {
+        char[][] newState = new char[6][7];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                newState[i][j] = state[i][j];
+            }
+        }
+        int row = 5;
+        while (row >= 0) {
+            if (newState[row][move] == ' ') {
+                newState[row][move] = (player == 1) ? 'X' : 'O';
+                break;
+            }
+            row--;
+        }
+        Node child = new Node(newState, 3 - player, move);
+        return child;
+    }
+
+    public void updateScore(double result) {
+        visits++;
+        score += result;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public int getVisits() {
+        return visits;
+    }
+
 
   //This method calculates the evaluation of the state
  int evaluator(){
