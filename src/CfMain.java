@@ -34,7 +34,7 @@ public class CfMain {
                                 Scanner scmcts = new Scanner(System.in);
                                 Node nodemcts = new Node();
                                 Game C4mcts = new Game(nodemcts);
-                                //MiniMax
+                                //MCTS
                                 C4mcts.useMCTS();
                                 scmcts.close();
                                 break;

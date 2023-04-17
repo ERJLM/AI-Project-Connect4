@@ -184,7 +184,7 @@ public class Game {
 
     Node expand(Node node){
         List<Integer> moves = node.getLegalMoves();
-        Random r = new Random(10);
+        Random r = new Random();
         int index = r.nextInt(moves.size());
         int move = moves.get(index);
         Node child = node.childNode(move);
@@ -195,7 +195,7 @@ public class Game {
         Node state = node.copy();
         while(!state.terminated()){
             List<Integer> moves = state.getLegalMoves();
-            Random r = new Random(10);
+            Random r = new Random();
             int index = r.nextInt(moves.size());
             int move = moves.get(index);
             state.move(move);
