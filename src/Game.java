@@ -14,7 +14,6 @@ public class Game {
     }
 
    
-
     //MiniMax
    void useMiniMax(){
         Scanner sc = new Scanner(System.in);
