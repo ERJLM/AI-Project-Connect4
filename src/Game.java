@@ -108,6 +108,7 @@ public class Game {
         while(!node.terminated()){
             if(node.getTurn() == pcToken){
                 int move = MCTS();
+                System.out.println(move);
                 node.move(move);
                 node.print();
             }
@@ -131,26 +132,21 @@ public class Game {
 
     int MCTS(){
         Node rootNode = node.copy();
-        while(!rootNode.terminated()){
-            // Selection
-            Node selectedNode = select(rootNode);
+        //System.out.println(rootNode.toString());
+        Node selectedNode = select(rootNode);
+        //System.out.println(selectedNode.toString());
+            Node expandedNode = expand(selectedNode);
+            //System.out.println(expandedNode.toString());
+            // Simulation
+            int result = simulate(expandedNode);
+            // Backpropagation
+            backpropagate(expandedNode, result);
 
-            // Expansion
-            if(!selectedNode.terminated()){
-                Node expandedNode = expand(selectedNode);
-
-                // Simulation
-                int result = simulate(expandedNode);
-
-                // Backpropagation
-                backpropagate(expandedNode, result);
-            }
-        }
+        if(rootNode.getChildren().size()<1) return result;
 
         // Choose the best move
         int bestMove = Integer.MIN_VALUE;
         double bestScore = Double.MIN_VALUE;
-
         for(Node child : rootNode.getChildren()){
             double score = (double)child.getScore() / (double)child.getVisits();
             if(score > bestScore){
@@ -163,7 +159,7 @@ public class Game {
     }
 
     Node select(Node node){
-        while(!node.getChildren().isEmpty()){
+        while(!node.terminated() && !node.getChildren().isEmpty()){
             Node bestChild = null;
             double bestUCB1 = Double.MIN_VALUE;
 
@@ -198,6 +194,7 @@ public class Game {
             int index = r.nextInt(moves.size());
             int move = moves.get(index);
             state.move(move);
+            break;
         }
 
         return state.utility();
@@ -216,9 +213,4 @@ public class Game {
         double exploration = C * Math.sqrt(Math.log((double)node.getParent().getVisits()) / (double)node.getVisits());
         return exploitation + exploration;
     }
-
-
-
-
-
 }

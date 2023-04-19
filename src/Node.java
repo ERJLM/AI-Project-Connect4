@@ -12,14 +12,6 @@ public class Node{
  private double score;
  private int visits;
 
-    Node(char[][] state, int depth, int lastMove) {
-        this.state = state;
-        this.depth = depth;
-        this.lastMove = lastMove;
-        this.score = 0;
-        this.visits = 0;
-        this.children = new ArrayList<>();
-    }
     Node(){
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 7; j++){
@@ -106,7 +98,7 @@ public class Node{
             }
             row--;
         }
-        Node child = new Node(newState, 3 - player, move);
+        Node child = new Node();
         return child;
     }
 

@@ -38,11 +38,11 @@ public class CfMain {
                                 C4mcts.useMCTS();
                                 scmcts.close();
                                 break;
-                            case "astar2":
+                            case "alphabeta":
                                 // totas
                                 break;
                             case "help":
-                                System.out.println("minmax - minmax algorithm\nmcts - monte carlo tree search algorithm\nastar2 - astar2 search");
+                                System.out.println("minmax - minmax algorithm\nmcts - monte carlo tree search algorithm\nalphabeta - alphabeta algorithm");
                             default:
                                 System.out.println("Invalid game Command!");
                                 break;
