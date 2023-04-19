@@ -124,27 +124,27 @@ public class Game {
         if (node.getDepth() >= 42) System.out.println("Draw");
         else if(node.utility() >= 512){
             System.out.println("Player " + "X" + " won");
+            System.exit(0);
         }
         else if(node.utility() <= -512){
             System.out.println("Player " + "O" + " won");
+            System.exit(0);
         }
     }
 
     int MCTS(){
         Node rootNode = node.copy();
-        //System.out.println(rootNode.toString());
-        Node selectedNode = select(rootNode);
-        //System.out.println(selectedNode.toString());
+        // chooses three possible solutions, I tried all but it keeps looping :(
+        int times=3;
+        while(times>0){
+            times--;
+            Node selectedNode = select(rootNode);
             Node expandedNode = expand(selectedNode);
-            //System.out.println(expandedNode.toString());
-            // Simulation
             int result = simulate(expandedNode);
-            // Backpropagation
             backpropagate(expandedNode, result);
+            if(rootNode.getChildren().size()<1) return result;
+        }
 
-        if(rootNode.getChildren().size()<1) return result;
-
-        // Choose the best move
         int bestMove = Integer.MIN_VALUE;
         double bestScore = Double.MIN_VALUE;
         for(Node child : rootNode.getChildren()){
