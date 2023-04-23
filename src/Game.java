@@ -18,7 +18,11 @@ public class Game {
       
       while(!node.terminated()){
         if(node.getTurn() == pcToken){
+            long startTime = System.currentTimeMillis();
         alphaBeta();
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+            System.out.println("Elapsed time of AlphaBeta: " + elapsedTime + "ms");
         node.print();
         }
         else{
@@ -42,10 +46,11 @@ public class Game {
     Scanner sc = new Scanner(System.in);
     while(!node.terminated()){
       if(node.getTurn() == pcToken){
-      
-     
-      miniMax();
-     
+          long startTime = System.currentTimeMillis();
+        miniMax();
+          long endTime = System.currentTimeMillis();
+          long elapsedTime = endTime - startTime;
+          System.out.println("Elapsed time of MiniMax: " + elapsedTime + "ms");
       node.print();
       }
       else{
@@ -194,7 +199,11 @@ public class Game {
         Scanner sc = new Scanner(System.in);
         while(!node.terminated()){
             if(node.getTurn() == pcToken){
+                long startTime = System.currentTimeMillis();
                 int move = MCTS();
+                long endTime = System.currentTimeMillis();
+                long elapsedTime = endTime - startTime;
+                System.out.println("Elapsed time of MCTS: " + elapsedTime + "ms");
                 System.out.println(move);
                 node.move(move);
                 node.print();
