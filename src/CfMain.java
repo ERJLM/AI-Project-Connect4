@@ -13,6 +13,7 @@ public class CfMain {
                 case "info":
                     System.out.println("Realizado por:\n-> 202203859 - Joao Manuel Cardoso Guedes\n-> 202203858 - Eliandro Ricardo Joao Luis de Melo\n-> 202105587 - Antonio Maria Araujo Pinto dos Santos\n");
                     break;
+                
                 case "create":
                     System.out.println("Creating new connect 4 game...");
                     String choiceGame = null;
@@ -22,27 +23,38 @@ public class CfMain {
                         choiceGame = scan.nextLine();
                         if(choiceGame.equals("quit")) break;
                         switch (choiceGame) {
-                            case "minmax":
+                            case "minimax":
+                            System.out.println("If you want to start type 1, else type any other number:");
                                 Scanner sc = new Scanner(System.in);
-                                Node node = new Node();
+                                int start = sc.nextInt();
+                                Node node = new Node(start);
                                 Game C4 = new Game(node);
                                 //MiniMax
                                 C4.useMiniMax();
                                 sc.close();
                                 break;
+                            case "alphabeta":
+                                System.out.println("If you want to start type 1, else type any other number:");
+                                    Scanner sc2 = new Scanner(System.in);
+                                    int start2 = sc2.nextInt();
+                                    Node node2 = new Node(start2);
+                                    Game C4Alpha = new Game(node2);
+                                    //MiniMax
+                                    C4Alpha.useAlphaBeta();
+                                    sc2.close();
+                                    break;
                             case "mcts":
+                                System.out.println("If you want to start type 1, else type any other number:");
                                 Scanner scmcts = new Scanner(System.in);
-                                Node nodemcts = new Node();
+                                int start3 = scmcts.nextInt();
+                                Node nodemcts = new Node(start3);
                                 Game C4mcts = new Game(nodemcts);
                                 //MCTS
                                 C4mcts.useMCTS();
                                 scmcts.close();
                                 break;
-                            case "alphabeta":
-                                // totas
-                                break;
                             case "help":
-                                System.out.println("minmax - minmax algorithm\nmcts - monte carlo tree search algorithm\nalphabeta - alphabeta algorithm");
+                                System.out.println("minimax - minimax algorithm\nmcts - monte carlo tree search algorithm\nalphabeta - alphabeta algorithm");
                             default:
                                 System.out.println("Invalid game Command!");
                                 break;
@@ -61,3 +73,4 @@ public class CfMain {
         scan.close();
     }
 }
+
