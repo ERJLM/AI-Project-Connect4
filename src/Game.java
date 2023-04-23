@@ -65,7 +65,7 @@ public class Game {
   }
   else if(node.utility() <= -512){
     System.out.println("Player " + "O" + " won");
-   
+
   }
 }
 
@@ -248,17 +248,6 @@ public class Game {
     Node select(Node node){
         while(!node.terminated() && !node.getChildren().isEmpty()){
             Node bestChild = null;
-            double bestUCB1 = Double.MIN_VALUE;
-
-            for(Node child : node.getChildren()){
-                double ucb1 = UCB1(child);
-                if(ucb1 > bestUCB1){
-                    bestUCB1 = ucb1;
-                    bestChild = child;
-                }
-            }
-
-            node = bestChild;
         }
 
         return node;
@@ -289,32 +278,13 @@ public class Game {
 
     void backpropagate(Node node, int result){
         while(node != null){
-            node.updateScore(result);
+            node.setVisits(node.getVisits() + 1);
+            node.setScore(node.getScore() + result);
             node = node.getParent();
         }
     }
 
-    double UCB1(Node node){
-        double C = 1.0; // exploration parameter
-        double exploitation = (double)node.getScore() / (double)node.getVisits();
-        double exploration = C * Math.sqrt(Math.log((double)node.getParent().getVisits()) / (double)node.getVisits());
-        return exploitation + exploration;
-    }
-    
-    Node expand(Node n){
-   
-    if(n.terminated()) return n;
-    List<Integer> moves = n.getLegalMoves();
-    Random r = new Random();
-    int index = r.nextInt(moves.size());
-    int move = moves.get(index);
-    Node child = n.copy();
-    child.move(move);
-    return child;
-  }
 }
 
-
-/+
 
   

@@ -106,7 +106,7 @@ public class Node{
             }
             row--;
         }
-        Node child = new Node();
+        Node child = new Node(starter);
         return child;
     }
 
@@ -130,7 +130,7 @@ public class Node{
  }
 
  Node copy(){
-    Node res = new Node();
+    Node res = new Node(starter);
     res.setParent(parent);
     res.setTurn(turn);
     res.copyState(state);
@@ -140,7 +140,7 @@ public class Node{
 
  ArrayList<Node> expand(){
     ArrayList<Node> q = new ArrayList<>();
-    Node n = new Node();
+    Node n = new Node(starter);
     for(int i = 1; i <= 7; i++){
         n = copy();
         //n.print();
@@ -166,10 +166,17 @@ public class Node{
     turn = p;
  }
 
- private void setDepth(int p){
+ public void setDepth(int p){
     depth = p;
  }
 
+ public void setVisits(int visits){
+        this.visits=visits;
+ }
+
+ public void setScore(double score){
+        this.score=score;
+ }
  private void setState(int x, int y, char n){
    state[x][y] = n;
  }
