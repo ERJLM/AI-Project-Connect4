@@ -12,18 +12,25 @@ public class Node{
  private double score;
  private int visits;
 
-    Node(){
+    Node(int start){
         for(int i = 0; i < 6; i++){
             for(int j = 0; j < 7; j++){
                 state[i][j] = '-';
             }
         }
-        Random rand = new Random();
-        int upper = 2;
-        int t = rand.nextInt(upper);
-        if(t == 0)player = 'X';
-        else player = 'O';
-        turn = 'X';
+       
+        if(start == 1){
+            //player = 'O';
+            //pcToken = 'X';
+           turn = 'O';
+        }
+        else{
+            //player = 'X';
+            //pcToken = 'O';
+             turn = 'X';
+        }
+        
+        
         starter = turn;
         parent = null;
         depth = 0;
@@ -32,6 +39,7 @@ public class Node{
         visits = 0;
         children = new ArrayList<>();
     }
+
 
 
  char[][] getState(){
