@@ -30,7 +30,6 @@ public class Game {
         }
     
     }
-    System.out.println(node.utility());
     sc.close();
     if (node.getDepth() >= 42) System.out.println("Draw");
     else if(node.utility() >= 512) System.out.println("Player X won");
@@ -58,7 +57,6 @@ public class Game {
       }
   
   }
-  System.out.println(node.utility());
   sc.close();
   if (node.getDepth() >= 42) System.out.println("Draw");
   else if(node.utility() >= 512){
@@ -208,7 +206,6 @@ public class Game {
                 node.print();
             }
         }
-        System.out.println(node.utility());
         sc.close();
         if (node.getDepth() >= 42) System.out.println("Draw");
         else if(node.utility() >= 512){
