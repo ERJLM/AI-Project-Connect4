@@ -12,6 +12,30 @@ public class Game {
         pcToken = 'X';
         
     }
+    
+    void useAlphaBeta(){
+      Scanner sc = new Scanner(System.in);
+      
+      while(!node.terminated()){
+        if(node.getTurn() == pcToken){
+        alphaBeta();
+        node.print();
+        }
+        else{
+        System.out.println("Choose a move: ");
+        int m = sc.nextInt();
+        node.move(m);
+        //alphaBeta();
+        node.print();
+        }
+    
+    }
+    System.out.println(node.utility());
+    sc.close();
+    if (node.getDepth() >= 42) System.out.println("Draw");
+    else if(node.utility() >= 512) System.out.println("Player X won");
+    else if(node.utility() <= -512) System.out.println("Player O won");
+  }
 
    
     //MiniMax
