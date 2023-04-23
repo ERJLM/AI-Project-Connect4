@@ -303,6 +303,18 @@ public class Game {
         double exploration = C * Math.sqrt(Math.log((double)node.getParent().getVisits()) / (double)node.getVisits());
         return exploitation + exploration;
     }
+    
+    Node expand(Node n){
+   
+    if(n.terminated()) return n;
+    List<Integer> moves = n.getLegalMoves();
+    Random r = new Random();
+    int index = r.nextInt(moves.size());
+    int move = moves.get(index);
+    Node child = n.copy();
+    child.move(move);
+    return child;
+  }
 }
 
 
