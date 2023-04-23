@@ -35,14 +35,14 @@ public class CfMain {
                                 break;
                             case "alphabeta":
                                 System.out.println("If you want to start type 1, else type any other number:");
-                                    Scanner sc2 = new Scanner(System.in);
-                                    int start2 = sc2.nextInt();
-                                    Node node2 = new Node(start2);
-                                    Game C4Alpha = new Game(node2);
-                                    //MiniMax
-                                    C4Alpha.useAlphaBeta();
-                                    sc2.close();
-                                    break;
+                                Scanner sc2 = new Scanner(System.in);
+                                int start2 = sc2.nextInt();
+                                Node node2 = new Node(start2);
+                                Game C4Alpha = new Game(node2);
+                                //MiniMax
+                                C4Alpha.useAlphaBeta();
+                                sc2.close();
+                                break;
                             case "mcts":
                                 System.out.println("If you want to start type 1, else type any other number:");
                                 Scanner scmcts = new Scanner(System.in);
