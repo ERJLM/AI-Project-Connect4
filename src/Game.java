@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -91,7 +90,6 @@ public class Game {
           }
         }
       
-      
         
       node.move(c);
       
@@ -154,8 +152,6 @@ public class Game {
             c = n.getLastMove(); 
           }
         }
-      
-      
         
       node.move(c);
       //System.out.println(c);
@@ -238,6 +234,8 @@ public class Game {
             Node expandedNode = expand(selectedNode);
             int result = simulate(expandedNode);
             backpropagate(expandedNode, result);
+
+
             if(rootNode.getChildren().size()<1) return result;
         }
 
