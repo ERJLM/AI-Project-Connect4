@@ -14,8 +14,7 @@ Connect Four: 4 em linha
 
 - A classe Game(ficheiro “Game.java”), representa o jogo e tem todos os métodos necessários para que o computador consiga jogar contra o utilizador.
 - O ficheiro “CfMain.java” contém a função main, e é o ficheiro que usaremos para compilar o programa.
-   
--No ficheiro “CfMain.java” temos tudo pronto para começar a jogar.
+- No ficheiro “CfMain.java” temos tudo pronto para começar a jogar.
 
 ## Vejamos como se inicia cada jogo:
 
