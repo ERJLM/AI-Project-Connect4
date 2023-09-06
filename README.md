@@ -5,6 +5,11 @@ Connect Four: 4 em linha
 
 ``` OpenJDK - version 17 ```
 
+## Descrição do Jogo
+
+O jogo "Connect 4", também conhecido como "Four in a Row" ou "Quatro em Linha", é um jogo de estratégia e habilidade para dois jogadores. O objetivo do jogo é ser o primeiro a conectar quatro peças da mesma cor em linha vertical, horizontal ou diagonal em um tabuleiro vertical composto por seis colunas e sete linhas.
+
+
 ## Bibliotecas
 
 - java.util.*;
