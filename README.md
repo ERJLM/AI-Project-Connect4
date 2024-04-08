@@ -1,26 +1,26 @@
-# Projeto-IA-Connect4
-Connect Four: 4 em linha
+# Project-AI-Connect4
+Connect Four: 4 in a row
 
-## Versão do Java
+## Java version
 
 ``` OpenJDK - version 17 ```
 
-## Descrição do Jogo
+## Game Description
 
-O jogo "Connect 4", também conhecido como "Four in a Row" ou "Quatro em Linha", é um jogo de estratégia e habilidade para dois jogadores. O objetivo do jogo é ser o primeiro a conectar quatro peças da mesma cor em linha vertical, horizontal ou diagonal em um tabuleiro vertical composto por seis colunas e sete linhas.
+The game "Connect 4", also known as "Four in a Row" or "Four in a Row", is a game of strategy and skill for two players. The objective of the game is to be the first to connect four pieces of the same color in a vertical, horizontal or diagonal line on a vertical board made up of six columns and seven rows.
 
 
-## Bibliotecas
+## Libraries
 
 - java.util.*;
 - import java.io.IOException;
 
-## Manual de Instruções para correr o programa:
+## Instruction Manual for running the program:
 
-- A classe Game(ficheiro “Game.java”), representa o jogo e tem todos os métodos necessários para que o computador consiga jogar contra o utilizador.
-- O ficheiro “CfMain.java” contém a função main, e é o ficheiro que usaremos para compilar o programa.
-- No ficheiro “CfMain.java” temos tudo pronto para começar a jogar.
+- The Game class (“Game.java” file) represents the game and has all the necessary methods for the computer to be able to play against the user.
+- The “CfMain.java” file contains the main function, and is the file we will use to compile the program.
+- In the “CfMain.java” file we have everything ready to start playing.
 
-## Vejamos como se inicia cada jogo:
+## Let's see how each game starts:
 
-Sendo que nós criamos um menu iterativo, não será necessário fazer as pesquisas manualmente, basta escrever “help” depois de compilar, e seguir as instruções.
+Since we created an iterative menu, it will not be necessary to do the searches manually, just write “help” after compiling, and follow the instructions.
